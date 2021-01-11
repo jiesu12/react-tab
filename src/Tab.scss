@@ -1,0 +1,41 @@
+.tabs-base {
+  ul.nav-tabs {
+    width: 100%;
+    margin-top: 10px;
+    margin-bottom: 15px;
+
+    li {
+      a {
+        cursor: pointer;
+        font-weight: 400;
+        font-size: 1.1rem;
+
+        &.active {
+          font-weight: 700;
+        }
+      }
+    }
+
+    .nav-link {
+      padding: 5px 10px;
+      font-size: 0.9rem;
+    }
+  }
+
+  .tab-component-base {
+    position: relative;
+
+    .tab-component {
+      position: absolute;
+      width: 100%;
+
+      &.show {
+        display: initial;
+      }
+
+      &.hide {
+        display: none;
+      }
+    }
+  }
+}
