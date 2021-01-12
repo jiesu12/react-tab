@@ -10,6 +10,7 @@
      "jsx": "react"
   },
   "include": [
+    "./src/**/*.scss",
     "./src/**/*.ts",
     "./src/**/*.tsx"
   ],

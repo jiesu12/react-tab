@@ -13,7 +13,7 @@ interface Props {
   setCurrentTitle?(title: string): void // otherwise currentTitle is controlled by Tabs.
 }
 
-const Tabs = ({ tabs, currentTitle, setCurrentTitle }: Props): React.ReactElement => {
+export default ({ tabs, currentTitle, setCurrentTitle }: Props) => {
   const [currentTitleLocal, setCurrentTitleLocal] = React.useState<string>(tabs[0].title)
   const currentTitleFinal = currentTitle === undefined ? currentTitleLocal : currentTitle
 
@@ -66,5 +66,3 @@ const Tabs = ({ tabs, currentTitle, setCurrentTitle }: Props): React.ReactElemen
     </div>
   )
 }
-
-export default Tabs
