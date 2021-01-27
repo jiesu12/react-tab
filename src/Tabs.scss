@@ -1,8 +1,10 @@
 .tabs-base {
   ul.nav-tabs {
     width: 100%;
-    margin-top: 10px;
+    padding-top: 5px;
     margin-bottom: 15px;
+    background-color: white;
+    z-index: 2;
 
     li {
       a {
@@ -23,7 +25,11 @@
   }
 
   .tab-component-base {
-    position: relative;
+    top: 40px;
+    position: fixed;
+    height: calc(100vh - 40px);
+    overflow: auto;
+    width: 100%;
 
     .tab-component {
       position: absolute;
