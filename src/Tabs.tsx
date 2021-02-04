@@ -5,6 +5,11 @@ export interface Tab {
   title: string
   component: (() => React.ReactNode) | React.ReactNode
   rerender?: boolean // if true, switch tab will re-redener component.
+  titleRenderer?(
+    title: string,
+    isCurrent: boolean,
+    setCurrentTitle: (title: string) => void
+  ): React.ReactElement
 }
 
 interface Props {
@@ -18,7 +23,7 @@ export default ({ tabs, currentTitle, setCurrentTitle }: Props) => {
   const currentTitleFinal = currentTitle === undefined ? currentTitleLocal : currentTitle
 
   const getNavLinkClass = (tab: Tab): string => {
-    return `nav-link ${currentTitleFinal === tab.title ? 'active' : ''}`
+    return `tab-title nav-link ${currentTitleFinal === tab.title ? 'active' : ''}`
   }
 
   const renderComponent = (tab: Tab) => {
@@ -46,19 +51,37 @@ export default ({ tabs, currentTitle, setCurrentTitle }: Props) => {
     }
   }
 
+  const setCurrentTitleEitherWay = (title: string) => {
+    setCurrentTitle ? setCurrentTitle(title) : setCurrentTitleLocal(title)
+  }
+
+  const renderTitle = (tab: Tab) => {
+    if (tab.titleRenderer === undefined) {
+      return (
+        <a
+          className={getNavLinkClass(tab)}
+          onClick={(): void => {
+            setCurrentTitleEitherWay(tab.title)
+          }}
+        >
+          {tab.title}
+        </a>
+      )
+    } else {
+      return (
+        <div className={getNavLinkClass(tab)}>
+          {tab.titleRenderer(tab.title, currentTitle === tab.title, setCurrentTitleEitherWay)}
+        </div>
+      )
+    }
+  }
+
   return (
     <div className='tabs-base'>
       <ul className='nav nav-tabs'>
         {tabs.map((tab) => (
           <li className='nav-item' key={tab.title}>
-            <a
-              className={getNavLinkClass(tab)}
-              onClick={(): void => {
-                setCurrentTitle ? setCurrentTitle(tab.title) : setCurrentTitleLocal(tab.title)
-              }}
-            >
-              {tab.title}
-            </a>
+            {renderTitle(tab)}
           </li>
         ))}
       </ul>
