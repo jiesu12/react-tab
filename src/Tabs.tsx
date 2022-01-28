@@ -58,14 +58,15 @@ export default ({ tabs, currentTitle, setCurrentTitle }: Props) => {
   const renderTitle = (tab: Tab) => {
     if (tab.titleRenderer === undefined) {
       return (
-        <a
-          className={getNavLinkClass(tab)}
-          onClick={(): void => {
-            setCurrentTitleEitherWay(tab.title)
-          }}
-        >
-          {tab.title}
-        </a>
+        <div className={getNavLinkClass(tab)}>
+          <a
+            onClick={(): void => {
+              setCurrentTitleEitherWay(tab.title)
+            }}
+          >
+            {tab.title}
+          </a>
+        </div>
       )
     } else {
       return (
